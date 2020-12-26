@@ -7,8 +7,7 @@ class QueueItemRepository {
     }
 
     async queue(name, alias) {
-        const queueItem = await (new this.model({ name, alias, consumed: false }).exec());
-        return queueItem;
+        return await this.model.create({ name: name, alias: alias, consumed: false });
     }
 
     async dequeue(alias) {
@@ -20,7 +19,7 @@ class QueueItemRepository {
             alias: alias,
             consumed: false
         })
-        .sort({ createdAt: -1 })
+        .sort({ createdAt: 1 })
         .exec();
     }
 

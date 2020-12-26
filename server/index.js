@@ -42,6 +42,6 @@ app.use((err, req, res) => {
 
 app.listen(APP_PORT);
 
-console.log(`server running and listening on http://localhost:${APP_PORT}`)
+console.log(`server up and running on http://localhost:${APP_PORT}`)
 
 module.exports = app;
