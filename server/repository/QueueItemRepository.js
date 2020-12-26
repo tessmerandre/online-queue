@@ -26,4 +26,4 @@ class QueueItemRepository {
 
 }
 
-module.exports = QueueItemRepository(QueueItem)
+module.exports = new QueueItemRepository(QueueItem)

@@ -3,10 +3,10 @@ const express = require('express');
 const app = express.Router();
 const repository = require('../repository/QueueItemRepository');
 
-// get all todo items in the db
 app.get('/', async (req, res) => {
-    console.log(req);
-    res.send("oie");
+    const alias = req.query.alias;
+    const items = await repository.findByQueueAlias(alias);
+    res.json(items);
 });
 
 app.post('/queue', async (req, res) => {
