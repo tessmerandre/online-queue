@@ -20,7 +20,12 @@ app.post('/queue', async (req, res) => {
 });
 
 app.post('/dequeue', async (req, res) => {
-    
+    const { alias } = req.query;
+
+    await repository.dequeue(alias);
+    const items = await list(alias);
+
+    res.json(items);
 });
 
 list = async (alias) => {

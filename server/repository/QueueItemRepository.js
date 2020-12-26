@@ -1,5 +1,4 @@
 const QueueItem = require('../models/QueueItem');
-
 class QueueItemRepository {
 
     constructor(model) {
@@ -11,7 +10,12 @@ class QueueItemRepository {
     }
 
     async dequeue(alias) {
-        return this.findByQueueAlias(alias);
+        const items = await this.findByQueueAlias(alias);
+
+        const firstItemId = items[0]._id;
+        await this.model.findOneAndUpdate({ _id: firstItemId }, { consumed: true })
+
+        return await this.findByQueueAlias(alias);
     }
 
     async findByQueueAlias(alias) {
